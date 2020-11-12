@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>IG Scheduler</title>
+
+        <!-- FAVICON -->
+        <link rel="icon" href="/favicon.ico">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+        <!-- BOOTSTRAP 4 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="css/mdb.min.css">
+        
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/home.css" type='text/css'>
+        <link rel="stylesheet" href="css/responsive.css" type='text/css'>       
+
+    </head>
+    
+    <body>
+
+        <!-- Modal Signin -->
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Ingresa tus datos</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <i class="fas fa-user prefix grey-text"></i>
+                            <input type="text" id="orangeForm-name" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="orangeForm-name">Username</label>
+                        </div>
+                        <div class="md-form mb-5">
+                            <i class="fas fa-envelope prefix grey-text"></i>
+                            <input type="email" id="orangeForm-email" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="orangeForm-email">Email</label>
+                        </div>
+                        <div class="md-form mb-4">
+                            <i class="fas fa-lock prefix grey-text"></i>
+                            <input type="password" id="orangeForm-pass" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="orangeForm-pass">Clave</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-deep-orange">Registrate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Error Login -->
+        <div class="modal fade" id="errorLogin" tabindex="-1" role="dialog" aria-labelledby="errorMessage" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorMessage">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        No hemos podido ingresar en tu cuenta. 
+                        Por favor introduce tus datos de acceso.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Login -->
+        <!-- Al input del password agregarle una opcion que permita ver el texto que se esta ingresando -->
+
+        <div class="container text-center contenedor">
+            <img class="mb-4" src="\igfv.svg" alt="" width="130" height="130">
+            <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
+            <form class="form-signin text-center" action="/login" method="post">
+                
+                <label for="username" class="sr-only">Usuario</label>
+                <input type="text" name = "username" class="form-control" placeholder="Usuario" required autofocus autocomplete="off">
+                <br>
+                <label for="password" class="sr-only">Contraseña</label>
+                <input type="password" name = "password"  class="form-control" placeholder="Contraseña" required>
+                
+                <a href="#">Olvidaste tu contraseña?</a>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-lg btn-primary btn-block w-75 boton">Entrar</button>
+                <br>
+                <button class="btn btn-lg btn-success btn-block w-75 boton" data-toggle = "modal" data-target="#modalRegisterForm" type="button">Crear cuenta</button>
+            </form>
+            <p class="mt-5 mb-3 text-muted">&copy; samueldar.io 2020</p>
+            
+        </div>
+
+        <!-- Custom JS --> 
+        <script type="text/javascript" src="js/login.js"></script>
+
+        <!-- jQuery --> 
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+
+        <!-- Bootstrap tooltips -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+
+        <% if (status=='loginFalse'){%>
+            <script>
+                $('#errorLogin').modal("show");                
+            </script>                
+        <%}%>
+
+    </body>
+
+</html>

@@ -1,0 +1,1 @@
+$('#errorLogin').modal({ show: false})

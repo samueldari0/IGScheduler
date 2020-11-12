@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <title>IG Scheduler</title>
+
+        <!-- BOOTSTRAP 4 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+        <link rel="icon" href="/favicon.ico">
+        
+        <link rel="stylesheet" href="/edit.css" type='text/css'>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-PMjWzHVtwxdq7m7GIxBot5vdxUY+5aKP9wpKtvnNBZrVv1srI8tU6xvFMzG8crLNcMj/8Xl/WWmo/oAP/40p1g==" crossorigin="anonymous" />
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        
+    </head>
+
+    <body class="bg-light">
+
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">IG Scheduler</a>
+            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Historial</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Perfil
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Ver tu perfil</a>
+                          <a class="dropdown-item" href="#">Ayuda</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- subNavbar -->
+        <div class="nav-scroller bg-white box-shadow">
+            <nav class="nav nav-underline">
+                <a class="nav-link active" href="#">Dashboard</a>
+                <a class="nav-link" href="#">
+                    Posts por publicar
+                    <span class="badge badge-pill bg-light align-text-bottom"> <%= posts.length %> </span>
+                </a>
+                <a class="nav-link" href="#">Posts publicados hoy</a>
+            
+            </nav>
+        </div>
+
+        <main role="main" class="container">
+
+            <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow" id="gradient">
+                <img class="mr-3" src="/igfv_blanco.svg" alt="" width="120" height="120">
+                <div class="lh-100">
+                    <h6 class="mb-0 text-white lh-100">IG Scheduler</h6>
+                    <small>Desde 2020</small>
+                </div>
+            </div>
+
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Imagen que se publicará:</h6>
+            
+                <form action="/edit/<%= post._id %> " method="POST" id="postForm" enctype='multipart/form-data'>
+                    <div class="form-group">
+
+                        <div class="d-flex justify-content-center">
+                            <img id="selected" src="/img/<%= post.img %>" alt="" class="mr-2 rounded" width="320" height="320">
+                        </div>
+                        
+                        <div class="d-flex justify-content-end">
+                            <label for="img" class="col-form-label">Seleccione la nueva Imagen:
+                                <input id="img" name="img" multiple type="file" accept="image/*" onchange="document.getElementById('selected').src = window.URL.createObjectURL(this.files[0])">
+                            </label>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="post" class="col-form-label">Editar Nota:</label>
+                        <textarea class="form-control" id="post" name="post" rows= "7"><%= post.post %> </textarea>
+                    </div>
+                    <div class="form-group">
+                        <h6 class="p-1">El Post será publicado a las:</h6>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex col-md-2 flex-row">
+                                <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                                    <input type="text" id="time" name="time" class="form-control datetimepicker-input" data-target="#datetimepicker3" value="<%= post.time %> "/>
+                                    <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker3').datetimepicker({
+                                            locale: 'es-us',
+                                            format: 'LT',
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" form = "postForm" class="btn btn-primary" >Programar publicación</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+                </form> 
+
+            </div>
+        </main>
+
+
+
+
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    
+    <script src="https://use.fontawesome.com/54362c6614.js"></script>
+    
+    <script type="text/javascript" src="/moment-with-locales.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-2JBCbWoMJPH+Uj7Wq5OLub8E5edWHlTM4ar/YJkZh3plwB2INhhOC3eDoqHm1Za/ZOSksrLlURLoyXVdfQXqwg==" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Custom JS  -->
+    <script>
+        $(function () {
+            'use strict'
+
+            $('[data-toggle="offcanvas"]').on('click', function () {
+            $('.offcanvas-collapse').toggleClass('open')
+            })
+        });
+    </script>
+
+    </body>
+</html>
