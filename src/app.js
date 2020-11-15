@@ -6,14 +6,13 @@ const volleyball = require('volleyball');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const { spawn } = require('child_process');
-var fs = require('fs');
+
 
 const {Post} = require('./models/posts')
 
 var schedule = require('node-schedule');
 
-const childPython = spawn('python', )
+
 
 require('dotenv').config();
 
@@ -66,6 +65,7 @@ function errorHandler(err, req, res, next) {
 app.use(notFound);
 app.use(errorHandler);
 
+/*
 async function nearJob(Post) {
   const result = await Post.find({}).sort({'date': 1});
   const nearJob = result[0];
@@ -74,7 +74,7 @@ async function nearJob(Post) {
 };
 
 const nextJob = nearJob(Post);
-
+*/
 //starting the server
 app.listen(port, () => {
     console.log('API REST Listening on port: '+port);

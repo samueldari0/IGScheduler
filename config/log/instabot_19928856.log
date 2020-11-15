@@ -1,0 +1,22 @@
+2020-11-13 16:22:15,608 - instabot version: 0.117.0 (bot) - INFO - Instabot version: 0.117.0 Started
+2020-11-13 16:22:15,608 - instabot version: 0.117.0 (bot) - DEBUG - Bot imported from C:\mskdl6\FINAMPYME\IGScheduler\lib\site-packages\instabot\bot\bot.py
+2020-11-13 16:22:15,643 - instabot version: 0.117.0 (api_login) - DEBUG - Loading cookies
+2020-11-13 16:22:15,643 - instabot version: 0.117.0 (api_login) - DEBUG - Loading uuids
+2020-11-13 16:22:15,643 - instabot version: 0.117.0 (api_login) - INFO - Recovery from C:\mskdl6\FINAMPYME\IGScheduler/config/testingfinampyme_uuid_and_cookie.json: COOKIE True - UUIDs True - TIMING, DEVICE and ...
+- user-agent=Instagram 117.0.0.28.123 Android (28/9.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A3003; OnePlus3; qcom; en_US; 180322800)
+- phone_id=315ea9a3-9197-4f2c-843b-d202f5687144
+- uuid=5c279ed9-0055-4a74-b317-c957b44c3424
+- client_session_id=c56504d6-4044-4e5c-ac4e-f5b9ad957bb4
+- device_id=android-ba21a2cd07eb18cf
+2020-11-13 16:22:15,644 - instabot version: 0.117.0 (api_login) - INFO - LOGIN FLOW! Just logged-in: False
+2020-11-13 16:22:20,072 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: feed/timeline/ returned response: <Response [200]>
+2020-11-13 16:22:20,821 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: feed/reels_tray/ returned response: <Response [200]>
+2020-11-13 16:22:21,525 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: direct_v2/ranked_recipients/ returned response: <Response [200]>
+2020-11-13 16:22:22,144 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: direct_v2/ranked_recipients/ returned response: <Response [200]>
+2020-11-13 16:22:22,854 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: direct_v2/inbox/ returned response: <Response [200]>
+2020-11-13 16:22:23,539 - instabot version: 0.117.0 (api) - DEBUG - GET to endpoint: direct_v2/get_presence/ returned response: <Response [200]>
+2020-11-13 16:22:24,443 - instabot version: 0.117.0 (api) - DEBUG - GET to endpoint: news/inbox/?limited_activity=true&show_su=true returned response: <Response [200]>
+2020-11-13 16:22:25,072 - instabot version: 0.117.0 (api) - DEBUG - GET to endpoint: users/profile_notice/ returned response: <Response [200]>
+2020-11-13 16:22:26,354 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: discover/explore/ returned response: <Response [200]>
+2020-11-13 16:22:26,357 - instabot version: 0.117.0 (api) - INFO - Logged-in successfully as 'testingfinampyme'!
+2020-11-13 16:22:26,357 - instabot version: 0.117.0 (bot_checkpoint) - DEBUG - Loading Checkpoint file from: C:\mskdl6\FINAMPYME\IGScheduler/config/testingfinampyme.checkpoint

@@ -3,6 +3,14 @@ $(document).ready(function() {
     setTimeout(function() {
         $(".alert").alert('close');
     }, 2000);
+
+    const params = new URLSearchParams(window.location.search)
+
+    status = params.get('status')
+
+    if (status == 'added' || status == 'deleted') {
+        window.location.href =  window.location.href.split("?")[0];  
+    }
 });
 
 //triggered when modal is about to be shown

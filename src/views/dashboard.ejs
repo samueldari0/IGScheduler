@@ -25,7 +25,7 @@
 
         <!-- navbar -->
         <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">IG Scheduler</a>
+            <a class="navbar-brand" href="/">IG Scheduler</a>
             <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,7 +33,7 @@
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Historial</a>
@@ -63,8 +63,9 @@
             <div class="alert alert-success" id="success-alert" role="alert">
                 El Post se ha programado exitosamente.
             </div>
-            
-        <% }; %> 
+        <%
+                        
+            }; %> 
 
         <!-- messageStatus2 -->
         <% if (status == 'deleted') { %>
@@ -73,7 +74,9 @@
                 El Post se ha eliminado exitosamente.
             </div>
             
-        <% }; %> 
+        <% 
+            
+            }; %> 
 
         <!-- modalPost -->
         <div class="modal fade" id="publicarPost" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -115,7 +118,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" form = "postForm" class="btn btn-primary" >Programar publicación</button>
+                        <button type="submit" form = "postForm" class="btn btn-primary" >Programar publicación</button>
                     </div>
                 </div>
             </div>
@@ -126,7 +129,7 @@
         <!-- subNavbar -->
         <div class="nav-scroller bg-white box-shadow">
             <nav class="nav nav-underline">
-                <a class="nav-link active" href="#">Dashboard</a>
+                <a class="nav-link active" href="/">Dashboard</a>
                 <a class="nav-link" href="#">
                     Posts por publicar
                     <span class="badge badge-pill bg-light align-text-bottom"> <%= posts.length %> </span>
@@ -143,7 +146,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel2">Eliminar Post</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -154,8 +157,7 @@
                             <input type="hidden" name="extra_submit_param" value="extra_submit_value">
                         
                             <button type="submit" class="btn btn-danger">Eliminar</a>
-                            
-                            
+
                         </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     </div>
@@ -249,6 +251,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-2JBCbWoMJPH+Uj7Wq5OLub8E5edWHlTM4ar/YJkZh3plwB2INhhOC3eDoqHm1Za/ZOSksrLlURLoyXVdfQXqwg==" crossorigin="anonymous"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    
 
     </body>
 </html>

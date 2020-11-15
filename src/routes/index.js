@@ -6,13 +6,17 @@ const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 
+let {PythonShell} = require('python-shell');
+var myPythonScriptPath = path.join(__dirname,"../main.py");
 
+
+
+var schedule = require('node-schedule');
 
 const moment = require('moment');
 moment().format(); 
 const random = require('random');
 var seconds = random.int(min = 0, max = 59);
-
 
 
 const { validateUser, User } = require('../models/user');
@@ -24,6 +28,7 @@ const verifyToken = require('../middleware/verifyToken');
 const multer = require('multer');
 const { time } = require('console');
 const { string } = require('joi');
+const { networkInterfaces } = require('os');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -118,17 +123,33 @@ router.post('/login', [validateMiddleWare(validateUser)], (req, res, next) =>{
 
 router.get('/dashboard', verifyToken, async (req,res) => {
     var status = req.query.status;
+    console.log({'este es el script':myPythonScriptPath});
+    
     posts = await Post.find({}).sort({'date': 1});
 
+    /*
+    var nextJob = posts[0];
+    if ({nextJob}) {
+
+        var j = schedule.scheduleJob(nextJob.date,(nextJob =>{
+            console.log(nextJob);
+            //postear(nextJob);
+        }).bind(null)
+        );
+        console.log({'proximo Post programado para las': nextJob.time});
+    }
+    */
+    
+   
     console.log({'status' : status});
-    console.log(posts[0]);
+    
     res.render('dashboard', {posts, status},);
     
 });
 
 router.post('/add', verifyToken, upload.single('img'), (req,res,next) => {
     
-    const time = req.body.time;
+    var time = req.body.time;
     const gmt = time.slice(-2,);
     console.log({'time':time});
 
@@ -145,6 +166,12 @@ router.post('/add', verifyToken, upload.single('img'), (req,res,next) => {
         hour = (hour + 12).toString()        
     }
 
+    if (gmt=="AM" && hour == 12) {
+        hour = '00'
+        time = hour +':'+ timeSplitted[1]
+
+    }
+
     var myDate = moment((hour + ':' + timeSplitted[1] + seconds.toString()), 'hh:mm:ss').toDate();
 
     if (myDate < Date.now()) {
@@ -155,7 +182,7 @@ router.post('/add', verifyToken, upload.single('img'), (req,res,next) => {
     const post = new Post({
         post: req.body.post,
         img: req.file.filename,
-        time: req.body.time,
+        time: time,
         date: myDate
     });
 
@@ -170,6 +197,16 @@ router.post('/add', verifyToken, upload.single('img'), (req,res,next) => {
 
     post.save().then(result => {
         
+        var j = schedule.scheduleJob(post.date, async function (fireDate) {
+
+            var newJob = await Post.findOne({date: fireDate}).exec();
+            if (newJob) {
+                postear(newJob);
+            }
+        });
+
+        console.log({'proximo Post programado para las': post.time});
+
         res.redirect('/dashboard?status=added');
         res.status(201).json({
             message: "Se ha programado el Post exitosamente.",
@@ -265,12 +302,45 @@ router.get('/profile', verifyToken, (req,res) => {
     res.render('profile');
 });
 
+router.get('/logout', verifyToken, (req,res) => {
+});
+
 function respondError422(res,next){
 
     res.status(422);
     const error = new Error('Unable to login');
     next(error);
 
+};
+
+
+function postear(newJob){
+
+    let mypromise = new Promise((resolve, reject) => {
+        toSend = newJob._id
+        console.log({ 'este es el id' : toSend })
+        var options = {
+        mode: 'text',
+        pythonOptions: ['-u'],
+        args: [toSend]
+        };
+
+        PythonShell.run(myPythonScriptPath, options, function (err, results) {
+        
+            if (err) throw err;
+            successMessage = results.toString()
+        // results is an array consisting of messages collected during execution
+            console.log('results: %j', successMessage);
+
+        });
+    });
+
+    mypromise.then((successMessage) => {
+
+        console.log(successMessage)
+        console.log("siiii!!!");
+
+    });
 };
 
 module.exports = router;
